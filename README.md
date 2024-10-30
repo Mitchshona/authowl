@@ -82,7 +82,7 @@ We will evaluate your submission based on:
 ## API Endpoints
 
 - A backend server is provided for this assignment, hosted at [34.118.195.238:8080/api/v1]
-- API documentation is available through Swagger UI at [SWAGGER_URL]
+- API documentation is available through Swagger UI at [34.118.195.238:8080/swagger]
 - You can explore and test all available endpoints directly in the Swagger interface
 
 ## Need Help?
