@@ -12,9 +12,7 @@ Firebase initialization file (firebase.ts)
 
 ### Important Note about Firebase Setup:
 
-The provided Firebase configuration file will not work out of the box
-Part of the assignment is to identify and make the necessary changes to get Firebase working
-You will need to:
+The provided Firebase configuration file will not work out of the box. Part of the assignment is to identify and make the necessary changes to get Firebase working. You will need to:
 
 - Review the Firebase configuration
 - Identify the missing pieces
@@ -22,7 +20,7 @@ You will need to:
 
 ## Time Expectation
 
-- Given time: 1 week
+- Expected completion time: 1 week
 
 ## Requirements
 
@@ -42,7 +40,7 @@ You will need to:
 - Loading state during form submission
 - Error handling and display
 - Redirect to settings page on successful login
-- Users that are accessing root route and have not logged in should be redirected to '/login'
+- Users accessing root route and have not logged in should be redirected to '/login'
 
 ### Settings Page (`/settings`)
 
@@ -70,7 +68,7 @@ We will evaluate your submission based on:
 3. State management approach
 4. Error handling
 5. UI/UX considerations
-6. TypeScript usage
+6. Effective TypeScript usage
 
 ## Getting Started
 
