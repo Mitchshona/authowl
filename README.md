@@ -31,6 +31,12 @@ The provided Firebase configuration file will not work out of the box. Part of t
 - Tailwind CSS
 - Any component library
 
+### Firebase Authentication
+
+- Use Firebase Authentication for the login page
+- Implement email/password authentication using Firebase
+- Store the Firebase user token securely (Backend API requires Firebase token as an authorization header)
+
 ### Login Page (`/login`)
 
 - Form with email and password inputs
@@ -39,6 +45,7 @@ The provided Firebase configuration file will not work out of the box. Part of t
   - Password minimum length (8 characters)
 - Loading state during form submission
 - Error handling and display
+-
 - Redirect to settings page on successful login
 - Users accessing root route and have not logged in should be redirected to '/login'
 
@@ -82,6 +89,12 @@ We will evaluate your submission based on:
 ## API Endpoints
 
 - A backend server is provided for this assignment, hosted at [34.118.195.238:8080/api/v1]
+  - Backend APIs require firebase auth token in the authorization header
+  ```ts
+  {
+    Authorization: `Bearer ${token}`;
+  }
+  ```
 - API documentation is available through Swagger UI at [34.118.195.238:8080/swagger]
 - You can explore and test all available endpoints directly in the Swagger interface
 
