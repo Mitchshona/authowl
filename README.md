@@ -95,7 +95,7 @@ We will evaluate your submission based on:
     Authorization: `Bearer ${token}`;
   }
   ```
-- API documentation is available through Swagger UI at [34.118.195.238:8080/swagger]
+- API documentation is available through Swagger UI at [http://34.118.195.238:8080/swagger]
 - You can explore and test all available endpoints directly in the Swagger interface
 
 ## Need Help?
