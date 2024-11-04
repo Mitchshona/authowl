@@ -58,6 +58,8 @@ The provided Firebase configuration file will not work out of the box. Part of t
 - Loading states for all async operations
 - Basic error handling
 - Clean and maintainable code structure
+- Functional nav bar with log out button (other pages can be empty)
+- Functional tab bar (other tabs can be empty)
 
 ## Evaluation Criteria
 
