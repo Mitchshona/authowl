@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./styles/typography.css"; 
+import { Roboto_Flex } from 'next/font/google';
+
+const robotoFlex = Roboto_Flex({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto-flex',
+});
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,10 +32,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={`${robotoFlex.variable} ${geistSans.variable} ${geistMono.variable}`}>
+      <body className="antialiased font-sans">
         {children}
       </body>
     </html>
