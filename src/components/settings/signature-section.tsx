@@ -68,7 +68,7 @@ export default function SignatureSection({
       }
       setIsDialogOpen(false);
       setNewSignatureName("");
-    } catch (err) {
+    } catch {
       setError("Failed to add signature. Please try again later.");
     } finally {
       setIsLoading(false);
@@ -82,7 +82,7 @@ export default function SignatureSection({
     try {
       await onRemoveSignature(parseInt(selectedSignature));
       setSelectedSignature("");
-    } catch (err) {
+    } catch {
       setError("Failed to remove signature. Please try again later.");
     } finally {
       setIsLoading(false);

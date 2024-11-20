@@ -1,15 +1,26 @@
-// settings-layout.tsx
 "use client";
 
 import { useState } from "react";
 import ProfileForm from "./profile-form";
 import SettingsTabs from "./settings-tabs";
 
+interface Signature {
+  signatureId: number;
+  signatureName: string;
+}
+
+interface MemberData {
+  email: string;
+  firstName: string;
+  lastName: string;
+  memberStatusId: number;
+  defaultSignatureId: number | null;
+  organisationId: number;
+  userSignatures: Signature[];
+}
+
 interface SettingsLayoutProps {
-  memberData: {
-    firstName: string;
-    lastName: string;
-  } | null;
+  memberData: MemberData | null;
 }
 
 export default function SettingsLayout({ memberData }: SettingsLayoutProps) {

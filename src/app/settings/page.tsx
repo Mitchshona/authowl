@@ -8,9 +8,24 @@ import { fetchWithAuth } from '@/app/utils/api'
 import SideNav from '@/components/layout/side-nav'
 import SettingsLayout from '@/components/settings/settings-layout'
 
+interface Signature {
+  signatureId: number;
+  signatureName: string;
+}
+
+interface MemberData {
+  email: string;
+  firstName: string;
+  lastName: string;
+  memberStatusId: number;
+  defaultSignatureId: number | null;
+  organisationId: number;
+  userSignatures: Signature[];
+}
+
 export default function SettingsPage() {
   const [isAuthChecking, setIsAuthChecking] = useState(true)
-  const [memberData, setMemberData] = useState(null)
+  const [memberData, setMemberData] = useState<MemberData | null>(null)
   const [error, setError] = useState('')
   const router = useRouter()
 
@@ -28,10 +43,9 @@ export default function SettingsPage() {
   }, [router])
 
   // Function to fetch member data
-  
   const fetchMemberData = async () => {
     try {
-      const data = await fetchWithAuth<any>('http://34.118.195.238:8080/api/v1/member')
+      const data = await fetchWithAuth<MemberData>('http://34.118.195.238:8080/api/v1/member')
       console.log('Member Data:', data) // Log the result to console
       setMemberData(data) // Set the member data to the state
     } catch (error) {
