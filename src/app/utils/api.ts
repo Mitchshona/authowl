@@ -1,17 +1,33 @@
-export async function fetchWithAuth(url: string, options: RequestInit = {}) {
-    // The token is automatically included in the request because it's stored in an HTTP-only cookie
+import { auth } from '@/services/firebase/firebase'
+
+export async function fetchWithAuth<T>(url: string, options: RequestInit = {}): Promise<T> {
+  const user = auth.currentUser
+  if (!user) {
+    throw new Error('User is not authenticated')
+  }
+
+  try {
+    const token = await user.getIdToken(true) // Force refresh the token
+
     const response = await fetch(url, {
       ...options,
-      credentials: 'include', // This ensures cookies are sent with the request
       headers: {
         ...options.headers,
-        'Authorization': 'Bearer ${token}', // The actual token will be inserted server-side
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
-    });
-  
+    })
+
     if (!response.ok) {
-      throw new Error('API request failed');
+      if (response.status === 401) {
+        throw new Error('401: Unauthorized. Please sign in again.')
+      }
+      throw new Error(`API request failed: ${response.status} ${response.statusText}`)
     }
-  
-    return response.json();
+
+    return response.json()
+  } catch (error) {
+    console.error('Error in fetchWithAuth:', error)
+    throw error
   }
+}

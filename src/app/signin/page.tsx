@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { signInWithEmailAndPassword, onAuthStateChanged, User } from 'firebase/auth'
-import { auth } from '../../services/firebase/firebase'
+import { auth } from '@/services/firebase/firebase'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import InputWithIcon from '@/components/input-with-icon'
+import Image from 'next/image'
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
@@ -102,28 +102,42 @@ export default function SignIn() {
     <div className="min-h-screen flex items-center justify-center bg-[url('/icons/background.png')] bg-cover bg-center">
       <div className="h-min-[483px] w-[373px] rounded-[8px] bg-[#FDFDFD] py-[20px] px-[32px]">
         <div className='flex justify-center'>
-          <img src="/icons/Owl.svg" alt="owl logo" className='w-[117px] h-[86px]'/>
+          <Image src="/icons/Owl.svg" alt="owl logo" width={117} height={86} className='w-[117px] h-[86px]'/>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-[16px]">
-            <InputWithIcon
-              label="Email"
-              id="email-address"
-              name="email"
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              iconSrc="/icons/Envelope.svg"
-              iconAlt="envelope icon"
-            />
+            <div className='flex flex-col gap-[4px]'>
+              <Label htmlFor="email-address" className='typography-label-small-caps-semibold uppercase text-[#5E6E7A]'>
+                Email
+              </Label>
+              <div className='relative flex items-center'>
+                <Image 
+                  src='/icons/Envelope.svg'
+                  alt='envelope icon'
+                  width={20} 
+                  height={20}
+                  className='absolute left-[20px] top-1/2 transform -translate-y-1/2 w-[20px] h-[20px]'
+                />
+                <Input
+                  id="email-address"
+                  name="email"
+                  type="text"
+                  className="rounded-[8px] border-[1px] border-[#AFB7BD] py-[12px] px-[24px] pl-[50px]"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+            </div>
             <div className='flex flex-col gap-[4px]'>
               <Label htmlFor="password" className='typography-label-small-caps-semibold uppercase text-[#5E6E7A]'>
                 PASSWORD
               </Label>
               <div className='relative flex items-center'>
-                <img 
+                <Image 
                   src='/icons/Lock.svg'
-                  alt='envelope icon'
+                  alt='lock icon'
+                  width={20} 
+                  height={20}
                   className='absolute left-[20px] top-1/2 transform -translate-y-1/2 w-[20px] h-[20px]'
                 />
                 <Input
@@ -135,9 +149,11 @@ export default function SignIn() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <img
+                <Image
                   src={isPasswordVisible ? "/icons/eye-opened.svg" : "/icons/eye-closed.svg"}
                   alt={isPasswordVisible ? "Hide password" : "Show password"}
+                  width={20} 
+                  height={20}
                   className='absolute right-[20px] top-1/2 transform -translate-y-1/2 cursor-pointer'
                   onClick={togglePasswordVisibility} 
                 />

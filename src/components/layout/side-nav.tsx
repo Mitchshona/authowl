@@ -19,7 +19,14 @@ const bottomNavItems = [
   { name: 'Settings', href: '/settings', icon: Settings },
 ]
 
-export default function SideNav() {
+interface SideNavProps {
+  memberData: {
+    firstName: string;
+    lastName: string;
+  } | null;
+}
+
+export default function SideNav({ memberData }: SideNavProps) {
   const pathname = usePathname()
   const router = useRouter()
 
@@ -49,9 +56,7 @@ export default function SideNav() {
             <li key={item.name}>
               <Link
                 href={item.href}
-                className={`flex items-center gap-3 px-5 py-3 typography-body-medium-regular text-[#5E6E7A] hover:bg-gray-50 ${
-                  isActive ? 'text-blue-600' : ''
-                }`}
+                className={`flex items-center gap-3 px-5 py-3 typography-body-medium-regular text-[#5E6E7A] hover:bg-gray-50 ${isActive ? 'text-blue-600' : ''}`}
               >
                 <Icon className="w-5 h-5" />
                 <span>{item.name}</span>
@@ -60,17 +65,17 @@ export default function SideNav() {
           )
         })}
       </ul>
-      
+
       <div className='flex flex-col gap-[16px] border-t-[1px] border-t-[#C3C9CD] pt-[16px]'>
         {/* User Profile */}
         <div className="px-5">
           <div className="flex items-center gap-3">
             <Avatar className="w-[48px] h-[48px]">
-              <AvatarImage src="/icons/Avatar.png" alt="John Lee" />
-              <AvatarFallback>JL</AvatarFallback>
+              <AvatarImage src="/icons/Avatar.png" alt={`${memberData?.firstName} ${memberData?.lastName}`} />
+              <AvatarFallback>{memberData ? `${memberData.firstName[0]}${memberData.lastName[0]}` : 'JL'}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
-              <span className="typography-button-medium-semibold text-[#364A59]">John Lee</span>
+              <span className="typography-button-medium-semibold text-[#364A59]">{memberData ? `${memberData.firstName} ${memberData.lastName}` : 'John Lee'}</span>
               <span className="typography-body-small-regular text-[#364A59]">Admin</span>
             </div>
           </div>
@@ -79,27 +84,19 @@ export default function SideNav() {
         {/* Bottom Navigation */}
         <ul>
           {bottomNavItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = pathname === item.href;
+            const Icon = item.icon
+            const isActive = pathname === item.href
             return (
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className={`flex items-center gap-3 px-5 py-3 ${
-                    isActive ? 'bg-[#E7F5FF]' : ''
-                  }`}
+                  className={`flex items-center gap-3 px-5 py-3 ${isActive ? 'bg-[#E7F5FF]' : ''}`}
                 >
                   <Icon className={`w-5 h-5 ${isActive ? 'text-[#1971C2]' : 'text-[#5E6E7A]'}`} />
-                  <span
-                    className={`${
-                      isActive ? 'typography-body-medium-semibold text-[#1971C2]' : 'typography-body-medium-regular text-[#5E6E7A]'
-                    }`}
-                  >
-                    {item.name}
-                  </span>
+                  <span className={`${isActive ? 'typography-body-medium-semibold text-[#1971C2]' : 'typography-body-medium-regular text-[#5E6E7A]'}`}>{item.name}</span>
                 </Link>
               </li>
-            );
+            )
           })}
 
           <li>
