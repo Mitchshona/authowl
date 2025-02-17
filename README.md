@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Frontend Developer Intern Take-Home Assignment
 
 ## Overview
@@ -103,3 +104,6 @@ We will evaluate your submission based on:
 If you have any questions or need clarification, please reach out to [digital@performance-rotors.com]. We're here to help!
 
 Good luck!
+=======
+# authowl
+>>>>>>> 5c6c8aef7d2be8f6b92280d449d67ac76e9da2ed
