@@ -33,7 +33,6 @@ export default function SettingsLayout({ memberData }: SettingsLayoutProps) {
         <div className="">
           <SettingsTabs activeTab={activeTab} onTabChange={setActiveTab} />
           {activeTab === "profile" && <ProfileForm memberData={memberData} />}
-          {/* Add other tab content components as needed */}
         </div>
       </div>
     </main>

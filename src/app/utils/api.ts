@@ -7,7 +7,7 @@ export async function fetchWithAuth<T>(url: string, options: RequestInit = {}): 
   }
 
   try {
-    const token = await user.getIdToken(true) // Force refresh the token
+    const token = await user.getIdToken(true) // Force refresh the token because it expires after 1 hour?
 
     const response = await fetch(url, {
       ...options,

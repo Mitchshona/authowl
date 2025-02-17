@@ -41,6 +41,7 @@ export default function SignatureSection({
 }: SignatureSectionProps) {
   const [selectedSignature, setSelectedSignature] = useState<string>("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false); 
   const [newSignatureName, setNewSignatureName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -82,6 +83,7 @@ export default function SignatureSection({
     try {
       await onRemoveSignature(parseInt(selectedSignature));
       setSelectedSignature("");
+      setIsRemoveDialogOpen(false); // Close the confirmation dialog after removal
     } catch {
       setError("Failed to remove signature. Please try again later.");
     } finally {
@@ -125,17 +127,17 @@ export default function SignatureSection({
               }
             }}
           >
-            <SelectTrigger className="w-full max-w-[200px]">
+            <SelectTrigger className="w-full max-w-[200px] typography-label-medium-regular text-[#5E6E7A]">
               <SelectValue>{getSelectedSignatureName()}</SelectValue>
             </SelectTrigger>
             <SelectContent>
               {signatures.map((sig) => (
-                <SelectItem key={sig.signatureId} value={sig.signatureId.toString()}>
+                <SelectItem key={sig.signatureId} value={sig.signatureId.toString()} className='typography-label-medium-regular text-[#364A59]'>
                   {sig.signatureName} {sig.signatureId === defaultSignatureId ? " (Default)" : ""}
                 </SelectItem>
               ))}
               <SelectItem value="add-new">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 typography-label-small-regular text-[#364A59] bg-[#E3E6E8] px-[8px] py-[4px] rounded-[4px]">
                   <Plus className="h-4 w-4" />
                   Add new signature
                 </div>
@@ -145,13 +147,34 @@ export default function SignatureSection({
           <Button
             variant="outline"
             size="icon"
-            onClick={handleRemoveSignature}
+            onClick={() => setIsRemoveDialogOpen(true)} // Open remove confirmation dialog
             disabled={isLoading || !selectedSignature || selectedSignature === defaultSignatureId?.toString()}
           >
             <Trash2 className="h-4 w-4" />
           </Button>
         </div>
 
+        {/* Remove Confirmation Dialog */}
+        <Dialog open={isRemoveDialogOpen} onOpenChange={setIsRemoveDialogOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Confirm Removal</DialogTitle>
+              <DialogDescription>
+                Are you sure you want to remove this signature?
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setIsRemoveDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button onClick={handleRemoveSignature} disabled={isLoading}>
+                {isLoading ? 'Removing...' : 'Remove Signature'}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* Add New Signature Dialog */}
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogContent>
             <DialogHeader>
@@ -167,7 +190,6 @@ export default function SignatureSection({
                   id="signature-name"
                   value={newSignatureName}
                   onChange={(e) => setNewSignatureName(e.target.value)}
-                  placeholder="e.g., Official Signature"
                 />
               </div>
             </div>

@@ -21,6 +21,16 @@
     text-decoration-skip-ink: none;
 }
 
+.typography-label-small-regular {
+    font-family: var(--font-roboto-flex);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
 .typography-label-medium-regular {
     font-family: var(--font-roboto-flex);
     font-size: 16px;

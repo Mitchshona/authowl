@@ -5,6 +5,9 @@ export async function middleware(request: NextRequest) {
   const session = request.cookies.get('session')
   const { pathname } = request.nextUrl
 
+  console.log('Middleware executed for path:', pathname)
+  console.log('Session:', session ? 'exists' : 'does not exist')
+
   // If the user is not logged in and trying to access a protected route
   if (!session && (pathname.startsWith('/settings') || pathname === '/')) {
     return NextResponse.redirect(new URL('/signin', request.url))
@@ -20,15 +23,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/settings', request.url))
   }
 
-  // For API routes, add the Authorization header
-  if (pathname.startsWith('/api/')) {
-    const response = NextResponse.next()
-    if (session) {
-      response.headers.set('Authorization', `Bearer ${session.value}`)
-    }
-    return response
-  }
-
   return NextResponse.next()
 }
 
@@ -37,6 +31,5 @@ export const config = {
     '/',
     '/signin',
     '/settings/:path*',
-    '/api/:path*',
   ],
 }

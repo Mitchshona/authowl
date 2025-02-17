@@ -36,6 +36,7 @@ interface ProfileFormProps {
   memberData: MemberData | null;
 }
 
+
 export default function ProfileForm({ memberData }: ProfileFormProps) {
   const [firstName, setFirstName] = useState<string>(memberData?.firstName || "");
   const [lastName, setLastName] = useState<string>(memberData?.lastName || "");
@@ -228,14 +229,16 @@ export default function ProfileForm({ memberData }: ProfileFormProps) {
               This determines the amount of access you get on the platform.
             </p>
           </div>
-          <Select defaultValue="admin">
-            <SelectTrigger className="w-full max-w-[200px]">
+          <Select 
+            defaultValue="admin"
+          >
+            <SelectTrigger className="w-full max-w-[200px] typography-label-medium-medium text-[#5E6E7A]">
               <SelectValue placeholder="Select access type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="admin">Admin</SelectItem>
-              <SelectItem value="user">User</SelectItem>
-              <SelectItem value="viewer">Viewer</SelectItem>
+              <SelectItem value="admin" className="typography-label-medium-regular text-[#364A59]">Admin</SelectItem>
+              <SelectItem value="user" className="typography-label-medium-regular text-[#364A59]">User</SelectItem>
+              <SelectItem value="viewer" className="typography-label-medium-regular text-[#364A59]">Viewer</SelectItem>
             </SelectContent>
           </Select>
         </div>

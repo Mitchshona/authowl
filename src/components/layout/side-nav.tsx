@@ -33,7 +33,7 @@ export default function SideNav({ memberData }: SideNavProps) {
   const handleLogout = async () => {
     try {
       await signOut(auth)
-      // Call your logout API route
+      // Call logout API route
       await fetch('/api/auth/logout', { method: 'POST' })
       router.push('/signin')
     } catch (error) {
@@ -51,12 +51,11 @@ export default function SideNav({ memberData }: SideNavProps) {
       <ul className="flex-1">
         {mainNavItems.map((item) => {
           const Icon = item.icon
-          const isActive = pathname === item.href
           return (
             <li key={item.name}>
               <Link
                 href={item.href}
-                className={`flex items-center gap-3 px-5 py-3 typography-body-medium-regular text-[#5E6E7A] hover:bg-gray-50 ${isActive ? 'text-blue-600' : ''}`}
+                className={`flex items-center gap-3 px-5 py-3 typography-body-medium-regular text-[#5E6E7A] hover:bg-gray-50`}
               >
                 <Icon className="w-5 h-5" />
                 <span>{item.name}</span>
@@ -72,7 +71,6 @@ export default function SideNav({ memberData }: SideNavProps) {
           <div className="flex items-center gap-3">
             <Avatar className="w-[48px] h-[48px]">
               <AvatarImage src="/icons/Avatar.png" alt={`${memberData?.firstName} ${memberData?.lastName}`} />
-              <AvatarFallback>{memberData ? `${memberData.firstName[0]}${memberData.lastName[0]}` : 'JL'}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
               <span className="typography-button-medium-semibold text-[#364A59]">{memberData ? `${memberData.firstName} ${memberData.lastName}` : 'John Lee'}</span>
